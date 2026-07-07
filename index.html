@@ -253,7 +253,9 @@ function grade(ok){
     if(cur.s===-1){cur.s=0;}else{cur.s=Math.min(cur.s+1,STEPS.length-1);}
     cur.due=addDays(STEPS[cur.s]);
   }else{
-    cur.s=-1; cur.seen=true; cur.lp=(cur.lp||0)+1; queue.push(cur);
+    cur.s=-1; cur.seen=true; cur.lp=(cur.lp||0)+1;
+    var pos=Math.floor(Math.random()*(queue.length+1));
+    queue.splice(pos,0,cur);
     S.miss=S.miss||{};
     const md=dstr();
     S.miss[md]=S.miss[md]||[];
