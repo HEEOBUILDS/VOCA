@@ -273,8 +273,12 @@ function gradeKnown(){
   cur.due=addDays(STEPS[cur.s]);
   if(wasFreshNew){
     const inQ=new Set(queue.map(c=>c.w));
-    const next=S.cards.find(c=>c.s===-1&&!c.seen&&!inQ.has(c.w));
-    if(next)queue.push(next);
+    const pool=S.cards.filter(c=>c.s===-1&&!c.seen&&!inQ.has(c.w));
+    if(pool.length){
+      const next=pool[Math.floor(Math.random()*pool.length)];
+      const pos=Math.floor(Math.random()*(queue.length+1));
+      queue.splice(pos,0,next);
+    }
   }
   save(); render();
 }
